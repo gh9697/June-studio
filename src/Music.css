@@ -1,0 +1,14 @@
+.music-page {
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  margin: 20px 0 20px 40px;
+}
+
+.band {
+  background: url("./img/band.png") no-repeat;
+  background-size: cover;
+  height: 297px;
+}

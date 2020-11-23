@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import fire from "./Fire";
+import fire from "../api/Fire";
 import Booking from "./Book";
 import styled from "styled-components";
-import './Login.css'
+import './css/Login.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 function Login() {
   const [clicked, setState]= useState(false);
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rpassword, setRpassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [hasAccount, setHasAccount] = useState(false);
 
   const clearInputs = () => {
     setEmail("");
@@ -44,8 +45,9 @@ function Login() {
   };
 
   const handleSignUp = () => {
-    alert("sign up" + email + password);
-    fire
+    console.log(password, rpassword);
+    if(password === rpassword){
+      fire
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .catch((err) => {
@@ -59,6 +61,10 @@ function Login() {
             break;
         }
       });
+    }else{
+      setPasswordError("Password and Repeat password does not match.");
+    }
+    
   };
 
   const handletoggleclick = () => {
@@ -78,9 +84,7 @@ function Login() {
 
   useEffect(() => {
     authListener();
-  }, []);
-
-  
+  });
 
   return (
     <LoginPage className="Login">
@@ -110,7 +114,7 @@ function Login() {
             <div className="button-container">
               <button onClick={handleLogin}>Login</button>
 				    </div>
-				    <div className="footer"><a href="">Forgot Your Password?</a></div>
+				    {/*<div className="footer">Forgot Your Password?</div>*/}
           </div>
           <div className="card alt">
             <div className="toggle" onClick={handletoggleclick}></div>
@@ -138,11 +142,12 @@ function Login() {
               <input
                 type="password"
                 required
-                value={password}
+                value={rpassword}
+                onChange={(e) => setRpassword(e.target.value)}
                 id="rpassword" name="rpassword"
               />
               <label for="rpassword">Repeat Password</label>
-              <div className="bar errorMsg">{passwordError}</div>
+              <div className="bar"></div>
             </div>
             <div className="button-container">
               <button onClick={handleSignUp}>Register</button>

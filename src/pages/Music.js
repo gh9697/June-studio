@@ -1,4 +1,4 @@
-import "./Music.css";
+import "./css/Music.css";
 import styled, { css } from "styled-components";
 
 function Music() {

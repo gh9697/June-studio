@@ -1,0 +1,5 @@
+.libraryContainer {
+  margin-top: -5%;
+  height: 80vh;
+  overflow-y: scroll;
+}

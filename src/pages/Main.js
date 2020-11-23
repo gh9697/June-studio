@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import mainmodel from "./img/model.png";
+import mainmodel from "../img/model.png";
 
 function Main() {
   return (
     <MainPage className="Main">
       <div className="circle"></div>
-      <img src={mainmodel} />
+      <img src={mainmodel} alt="Main Model"/>
       <h1 className="t1">Live for the</h1>
       <h1 className="t2">MUSIC</h1>
     </MainPage>

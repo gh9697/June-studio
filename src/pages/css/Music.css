@@ -12,3 +12,29 @@
   background-size: cover;
   height: 297px;
 }
+
+form input,
+form textarea {
+  display: none;
+}
+
+form button {
+  border-radius: 18px;
+  background: linear-gradient(
+    270deg,
+    rgba(116, 123, 219, 0.84) 13.33%,
+    rgba(212, 126, 200, 0.87) 100%
+  );
+  width: 150px;
+  text-align: center;
+  font-size: 18px;
+  height: 45px;
+  line-height: 45px;
+  border: none;
+  color: white;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: transform 1s;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,11 +1,17 @@
 import React, {useContext, useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 import MusicCardContainer from "../fragment/MusicCardContainer";
+import FooterMusicPlayer from "../fragment/FooterMusicPlayer";
 import "./css/Library.css";
 
 function  Library(){
-    const [screenSize, setScreenSize] = useState(undefined);
     const [currMusic, setCurrMusic] = useState(null);
-    const [Page, setCurrPage] = useState(<MusicCardContainer/>);
+    const {playing} = useSelector(state => state.musicReducer);
+
+    useEffect(() => {
+        setCurrMusic(playing)
+    }, [playing])
+
 
     return (
         <div className="libraryContainer">
@@ -14,6 +20,14 @@ function  Library(){
                     <MusicCardContainer/>
                 </div>
             </section>
+            <React.Fragment>
+                {
+                    currMusic
+                        ?
+                        <FooterMusicPlayer music={currMusic}/>
+                        : (<></>)
+                }
+            </React.Fragment>
         </div>
     )
 }

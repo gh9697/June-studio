@@ -1,0 +1,28 @@
+.bookingContainer {
+  background: url("../../img/direction-background.png");
+  margin-top: -5%;
+  height: 85vh;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+}
+.bookingContainer::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.7;
+  width: 100%;
+  height: 100%;
+}
+.bookingContainer h1 {
+  padding-top: 15%;
+  width: 100%;
+  position: absolute;
+  font-size: 50px;
+}
+.bookingContainer h2 {
+  padding-top: 23%;
+  width: 100%;
+  position: absolute;
+}

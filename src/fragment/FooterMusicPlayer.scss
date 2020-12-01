@@ -1,0 +1,21 @@
+.footer-player {
+  position: absolute;
+  height: 10vh;
+  width: 100vw;
+  align-items: center;
+  bottom: 0;
+}
+
+.playback-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  flex-basis: 40%;
+
+  audio {
+    width: 90vw;
+    align-items: center;
+  }
+}

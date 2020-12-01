@@ -4,6 +4,8 @@ import Booking from "./Book";
 import styled from "styled-components";
 import './css/Login.css';
 import 'font-awesome/css/font-awesome.min.css';
+import {useDispatch} from "react-redux";
+import {setCurrentPlayingUser} from "../actions/action";
 
 function Login() {
   const [clicked, setState]= useState(false);
@@ -13,6 +15,7 @@ function Login() {
   const [rpassword, setRpassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const dispatch = useDispatch();
 
   const clearInputs = () => {
     setEmail("");
@@ -25,7 +28,6 @@ function Login() {
   };
 
   const handleLogin = () => {
-    alert();
     clearErrors();
     fire
       .auth()
@@ -45,7 +47,6 @@ function Login() {
   };
 
   const handleSignUp = () => {
-    console.log(password, rpassword);
     if(password === rpassword){
       fire
       .auth()
@@ -76,6 +77,7 @@ function Login() {
       if (user) {
         clearInputs();
         setUser(user);
+        dispatch(setCurrentPlayingUser(user));
       } else {
         setUser("");
       }

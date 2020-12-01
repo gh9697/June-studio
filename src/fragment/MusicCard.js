@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import Name from "./Name";
 import playIcon from "../img/play-circle-filled-white.png";
-import {increaseTimesPlayed, setCurrentPlaying} from "../actions/action";
+import {setCurrentPlaying} from "../actions/action";
 import "./MusicCard.scss";
 
 function MusicCard(props) {
@@ -16,9 +16,15 @@ function MusicCard(props) {
 
     const dispatch = useDispatch();
 
-    function handlePlay() {
-        dispatch(setCurrentPlaying(props.music))
-        dispatch(increaseTimesPlayed(props.music.id));
+    function handlePlay(e) {
+        var allCard = document.querySelectorAll('.play-circle-img');
+        for(var i=0;i < allCard.length; i++){
+            if(allCard[i].style.visibility == "visible"){
+                allCard[i].style.visibility = "hidden";
+            };
+        }
+        e.target.querySelector('.play-circle-img').style.visibility = "visible";
+        dispatch(setCurrentPlaying(props.music));
     }
 
     return (
@@ -28,6 +34,8 @@ function MusicCard(props) {
                 <div className="play-circle">
                     <img src={playIcon} alt="play"/>
                 </div>
+                <img className="play-circle-img" src={playIcon} alt="play" 
+                    style={{height: "50px",width: "50px",position:"absolute", bottom: 0, visibility:"hidden"}}/>
             </div>
             <React.Fragment>
                 <Name name={name} className="song-name" length={name.length}/>

@@ -16,9 +16,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      .MuiSvgIcon-root {
-        font-size: 4rem;
-      }
     }
 
     .hover-img {
@@ -31,11 +28,13 @@
 
     img {
       filter: brightness(0.34);
+      pointer-events: none;
     }
 
     .play-circle {
       color: #fff;
       visibility: visible;
+      pointer-events: none;
     }
   }
 }

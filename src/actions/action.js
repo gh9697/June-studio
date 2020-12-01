@@ -4,9 +4,9 @@ export const setCurrentPlaying = (curr_music) => {
         payload: curr_music
     };
 }
-export const increaseTimesPlayed = (id) => {
+export const setCurrentPlayingUser = (curr_user) => {
     return {
-        type:"INC_TIMES_PLAYED",
-        payload: id
+        type: "SET_CURR_USER",
+        payload: curr_user
     };
-};
+}

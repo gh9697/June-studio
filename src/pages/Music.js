@@ -1,7 +1,29 @@
 import "./css/Music.css";
 import styled, { css } from "styled-components";
+import {useSelector} from "react-redux";
+import { useHistory } from "react-router-dom";
+import emailjs from "emailjs-com";
 
 function Music() {
+  const history = useHistory();
+  const {user} = useSelector(state => state.musicReducer);
+
+  const sendEmail= (e) => {
+    if(user){
+      e.preventDefault();
+      emailjs.sendForm('gmail', 'template_85lqcb8', e.target, 'user_sA1CDkwse34k4XWKqm0JL')
+        .then((result) => {
+            alert();
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+      }else{
+        history.push("/login");
+      }
+  }
+
+
   return (
     <section className="music-page">
       <ActivityList>
@@ -80,6 +102,12 @@ function Music() {
               <h4>Banglore, BLR.</h4>
             </Addr>
           </Info>
+          <form className="contact-form" onSubmit={sendEmail}>
+            <input type="text" name="user_name"  value="Henil"/>
+            <input type="email" name="user_email" value="henil97gondalia@gamil.com" />
+            <textarea name="message" value="Hi there ?" />
+            <button type="submit">Book Now</button>
+          </form>
         </MainText>
         <MainImage className="band" />
       </Main>
@@ -132,3 +160,4 @@ const Info = styled.div`
 `;
 const Date = styled.div``;
 const Addr = styled.div``;
+

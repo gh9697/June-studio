@@ -6,13 +6,11 @@ import Login from "./pages/Login";
 import logo from "./img/audio-wave-64.png";
 import fire from "./api/Fire";
 import { BrowserRouter as Router, Link, Route, Switch, NavLink } from "react-router-dom";
-// import {useDispatch, useSelector} from "react-redux";
-// import {setPlaylist} from "./actions/action";
 import "./App.css";
 
 function App() {
+  
   const [user, setUser] = useState("");
-  // const dispatch = useDispatch();
 
   const handleLogout = () => {
     fire.auth().signOut();
@@ -30,7 +28,6 @@ function App() {
 
   useEffect(() => {
     authListener();
-    // dispatch(setPlaylist(musicDB))
   }, []);
 
   return (

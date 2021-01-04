@@ -13,7 +13,7 @@ function Music() {
       e.preventDefault();
       emailjs.sendForm('gmail', 'template_85lqcb8', e.target, 'user_sA1CDkwse34k4XWKqm0JL')
         .then((result) => {
-            alert();
+          history.push("/login");
             console.log(result.text);
         }, (error) => {
             console.log(error.text);
@@ -103,8 +103,9 @@ function Music() {
             </Addr>
           </Info>
           <form className="contact-form" onSubmit={sendEmail}>
-            <input type="text" name="user_name"  value="Henil"/>
-            <input type="email" name="user_email" value="henil97gondalia@gamil.com" />
+            <input type="text" name="user_name"  value={user && user.displayName ? user.displayName:""}/>
+            <input type="email" name="to_email" value="uiattachment6@gmail.com" />
+            <input type="text" name="from_name" value="June Studio" />
             <textarea name="message" value="Hi there ?" />
             <button type="submit">Book Now</button>
           </form>

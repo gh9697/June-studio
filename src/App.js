@@ -52,7 +52,7 @@ function App() {
             <button>
               <Link to="/login"><span>Login</span></Link>
             </button>):(
-            <button onClick={handleLogout}><span>Logout</span></button>
+            <button onClick={handleLogout}><span>Logout { console.log(user) }</span></button>
             )}
           </li>
           </div>

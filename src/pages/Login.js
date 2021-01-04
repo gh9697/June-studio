@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import fire from "../api/Fire";
-import Booking from "./Book";
+import Concert from "./Music";
 import styled from "styled-components";
 import './css/Login.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -10,6 +10,7 @@ import {setCurrentPlayingUser} from "../actions/action";
 function Login() {
   const [clicked, setState]= useState(false);
   const [user, setUser] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rpassword, setRpassword] = useState("");
@@ -51,6 +52,11 @@ function Login() {
       fire
       .auth()
       .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        return result.user.updateProfile({
+          displayName: name
+        })
+      })
       .catch((err) => {
         switch (err.code) {
           case "auth/email-already-in-use":
@@ -91,7 +97,7 @@ function Login() {
   return (
     <LoginPage className="Login">
       {user ? (
-        <Booking />
+        <Concert />
       ) : (
         <div className={clicked ? 'loginContainer active' : 'loginContainer'}>
           <div className="card">
@@ -123,6 +129,12 @@ function Login() {
             <h1 className="title">Register
               <div className="close" onClick={() => setState(false)}></div>
             </h1>
+            <div className="input-container">
+              <input type="text" id="name" name="name" autoFocus required value={name}
+            onChange={(e) => setName(e.target.value)} />
+              <label for="name">Name</label>
+              <div className="bar"></div>
+            </div>
             <div className="input-container">
               <input type="text" id="lemail" name="lemail" autoFocus required value={email}
             onChange={(e) => setEmail(e.target.value)} />

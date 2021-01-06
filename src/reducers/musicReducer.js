@@ -3,7 +3,8 @@ import musicDB from "../db/musicDB";
 export const initialState = {
     playlists: musicDB,
     playing:null,
-    user: null
+    user: null,
+    booking: false,
 };
 
 const musicReducer = (state=initialState,action) => {
@@ -17,6 +18,11 @@ const musicReducer = (state=initialState,action) => {
             return {
                 ...state,
                 user: action.payload
+            }
+        case "SET_BOOKING_STATUS":
+            return {
+                ...state,
+                booking: action.payload
             }
         default:
             return state;

@@ -6,6 +6,8 @@ import './css/Login.css';
 import 'font-awesome/css/font-awesome.min.css';
 import {useDispatch} from "react-redux";
 import {setCurrentPlayingUser} from "../actions/action";
+import {NotificationManager} from 'react-notifications';
+
 
 function Login() {
   const [clicked, setState]= useState(false);
@@ -33,6 +35,9 @@ function Login() {
     fire
       .auth()
       .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        NotificationManager.success('Login Successfully');
+      })
       .catch((err) => {
         switch (err.code) {
           case "auth/invalid-email":

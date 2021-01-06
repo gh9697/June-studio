@@ -37,4 +37,5 @@ form button {
   transition: transform 1s;
   margin-left: 50%;
   transform: translateX(-50%);
+  outline: none;
 }

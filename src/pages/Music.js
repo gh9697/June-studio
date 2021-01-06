@@ -1,26 +1,35 @@
 import "./css/Music.css";
 import styled, { css } from "styled-components";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import { useHistory } from "react-router-dom";
 import emailjs from "emailjs-com";
+import {NotificationManager} from 'react-notifications';
+import {setBookingStatus} from '../actions/action'
 
 function Music() {
   const history = useHistory();
   const {user} = useSelector(state => state.musicReducer);
+  const {booking} = useSelector(state => state.musicReducer);
+  const dispatch = useDispatch();
 
   const sendEmail= (e) => {
-    if(user){
+    console.log("user",user);
+    if(user && !booking){
       e.preventDefault();
       emailjs.sendForm('gmail', 'template_85lqcb8', e.target, 'user_sA1CDkwse34k4XWKqm0JL')
         .then((result) => {
           history.push("/login");
-            console.log(result.text);
+          NotificationManager.success('Your ticket has been sent to your Email.', user.displayName);
+          dispatch(setBookingStatus(true));
+          console.log(result.text);
         }, (error) => {
-            console.log(error.text);
+          console.log(error.text);
         });
-      }else{
-        history.push("/login");
-      }
+    }else if(user && booking){
+      NotificationManager.success('Your ticket has been booked already!!!', user.displayName);
+    }else{
+      history.push("/login");
+    }
   }
 
 
@@ -104,10 +113,13 @@ function Music() {
           </Info>
           <form className="contact-form" onSubmit={sendEmail}>
             <input type="text" name="user_name"  value={user && user.displayName ? user.displayName:""}/>
-            <input type="email" name="to_email" value="uiattachment6@gmail.com" />
+            <input type="email" name="to_email" value={user && user.email ? user.email:""} />
             <input type="text" name="from_name" value="June Studio" />
-            <textarea name="message" value="Hi there ?" />
-            <button type="submit">Book Now</button>
+            <textarea name="message" 
+                    value="Hey there? Your ticket is confirmed."/>
+             <textarea name="note" 
+                    value="* Show this to reception to enter at the venue."  />
+            <button type="submit">{booking ? "Booked" : "Book Now"}</button>
           </form>
         </MainText>
         <MainImage className="band" />

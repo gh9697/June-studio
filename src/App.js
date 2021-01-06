@@ -6,20 +6,28 @@ import Login from "./pages/Login";
 import logo from "./img/audio-wave-64.png";
 import fire from "./api/Fire";
 import { BrowserRouter as Router, Link, Route, Switch, NavLink } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setCurrentPlayingUser} from "./actions/action";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 import "./App.css";
 
 function App() {
   
   const [user, setUser] = useState("");
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     fire.auth().signOut();
+    dispatch(setCurrentPlayingUser(null));
+    NotificationManager.info('You Logout Sucssessfully!!!');
   };
 
   const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        dispatch(setCurrentPlayingUser(user));
       } else {
         setUser("");
       }
@@ -56,6 +64,7 @@ function App() {
             )}
           </li>
           </div>
+          <NotificationContainer/>
         </nav>
         <Switch>
           <Route path="/" exact component={Main} />

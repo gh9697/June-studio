@@ -10,3 +10,10 @@ export const setCurrentPlayingUser = (curr_user) => {
         payload: curr_user
     };
 }
+
+export const setBookingStatus = (is_booked) => {
+    return {
+        type: "SET_BOOKING_STATUS",
+        payload: is_booked
+    };
+}
